@@ -398,14 +398,15 @@ class create_fb:
         else:
             if pos.find('title').text == 'Konfirmasikan Akun Anda': #--> Jika Akun Sudah Dibuat
                 self.scrap4()
-            else:
+         else:
                 rog = pos.find('form',{'method':'post'})
-                if 'login/device-based/update-nonce' in str(rog['action']): #--> Jika Masuk Menu Save Device
-                    self.scrap2(rog)
-                elif 'conf/notifmedium/send_code' in str(rog['action']): #--> Jika Langsung Masuk Menu Minta Kode Nope
-                    self.scrap3(rog)
-                elif 'checkpoint' in str(rog['action']): #--> Jika Checkpoint
-                    self.printing('CP')
+                if rog is not None:
+                   if 'login/device-based/update-nonce' in str(rog.get('action', '')):
+                       self.scrap2(rog)
+                   elif 'conf/notifmedium/send_code' in str(rog.get('action', '')):
+                       self.scrap3(rog)
+                   elif 'checkpoint' in str(rog.get('action', '')):
+                       self.printing('CP')
                 else:
                     print('\rTerjadi Kesalahan                    ',end='');sys.stdout.flush()
     def scrap2(self,fom): #--> Save Device OK
