@@ -398,8 +398,9 @@ class create_fb:
         else:
             if pos.find('title').text == 'Konfirmasikan Akun Anda': #--> Jika Akun Sudah Dibuat
                 self.scrap4()
-        else:
+            else:
                 rog = pos.find('form',{'method':'post'})
+                if rog is not None:
                 if 'login/device-based/update-nonce' in str(rog['action']): #--> Jika Masuk Menu Save Device
                     self.scrap2(rog)
                 elif 'conf/notifmedium/send_code' in str(rog['action']): #--> Jika Langsung Masuk Menu Minta Kode Nope
